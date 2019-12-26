@@ -5,8 +5,8 @@ const uuid = require('uuid/v1')
 const MOVIE_CREATE_MOCK = {     
     'name': 'The Matrix', 
     'genre': 'Action', 
-    releaseDate: '31/03/1999', 
-    IMDB: 7.8
+    release_date: '31/03/1999', 
+    imdb: 7.8
 }
 
 describe('MovieDAO Tests', async function(){
@@ -24,11 +24,13 @@ describe('MovieDAO Tests', async function(){
     })
 
     it('Read Movie', async function(){
-        
+        const res = await movieDAO.read({name: MOVIE_CREATE_MOCK.name})
+        delete res.id, 
+        assert.deepEqual(res, MOVIE_CREATE_MOCK) 
     })
 
-    it('Delete Movie', async function(){
-        const res = await movieDAO.delete(9)
-        assert.deepEqual(res, true) 
-    })
+    // it('Delete Movie', async function(){
+    //     const res = await movieDAO.delete(9)
+    //     assert.deepEqual(res, true) 
+    // })
 })

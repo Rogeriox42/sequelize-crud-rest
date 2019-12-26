@@ -23,6 +23,11 @@ class MovieDAO {
         return res 
     }
 
+    async read(query){
+        const [dataValues] = await this.db.findAll({query, raw: true})
+        return dataValues
+    }
+
     async _modelMovie() {
         this.db = this.driver.define('Movie',
             {
@@ -41,11 +46,11 @@ class MovieDAO {
                     type: Sequelize.TEXT,
                     required: true
                 },
-                releaseDate: {
+                release_date: {
                     type: Sequelize.TEXT,
                     required: true
                 },
-                IMDB: {
+                imdb: {
                     type: Sequelize.FLOAT,
                     required: true
                 }
