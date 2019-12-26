@@ -18,11 +18,10 @@ class Connection {
             this.connection = new Sequelize(DATABASE, USER, PWD,  {
                 host: HOST, 
                 port: DBPORT, 
-                // host: `${HOST}:${DBPORT}`, 
                 dialect: DIALECT,
                 quoteIdentifiers: false,
                 operatorAliases: false,
-                logging: false,
+                // logging: false,
             })
             return true; 
         } catch (error) {
