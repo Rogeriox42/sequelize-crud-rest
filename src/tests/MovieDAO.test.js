@@ -46,11 +46,13 @@ describe('MovieDAO Tests', async function(){
         console.log('item', item) 
         const newData = {
             ... MOVIE_UPDATE_MOCK, 
-            nome: 'Soul Reaver'
+            name: 'Soul Reaver'
         }
 
         await movieDAO.update(item.id, newData)
         const updatedItem = await movieDAO.read({id: item.id})
+
+        console.log('updatedItem', updatedItem)
 
         assert.deepEqual(updatedItem.id, item.id)
         assert.deepEqual(updatedItem.name, newData.name) 

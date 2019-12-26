@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv').config() 
 const app = express() 
 const PORT = process.env.PORT || 8040 
-const movieRoutes = require('./routes/api/v1/Movies')
+const movieRoutes = require('./src/routes/v1/Movie')
 
 app.get('/', (req, res) =>{
     res.status(200).send({

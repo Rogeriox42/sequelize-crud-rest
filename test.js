@@ -1,7 +1,9 @@
-const Connection = require('./src/db/Connection')
+const MovieDAO = require('./src/db/MovieDAO')
 
-const result = Connection.isConnected() 
-if(result){
-    console.log('Connected successfully!') 
+async function main() {
+    const movieDAO = new MovieDAO()
+    const list = await movieDAO.readAll()
+    console.log('list', list)
 }
 
+main() 

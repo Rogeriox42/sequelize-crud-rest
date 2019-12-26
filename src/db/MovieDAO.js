@@ -23,6 +23,11 @@ class MovieDAO {
         return dataValues
     }
 
+    async readAll(){
+        const dataValues = await this.db.findAll({raw: true})
+        return dataValues
+    }
+
     async delete(query = {}){
         const res = await this.db.destroy({where: query})
         return res 
