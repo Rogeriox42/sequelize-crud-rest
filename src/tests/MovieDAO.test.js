@@ -2,16 +2,24 @@ const MovieDAO = require('../db/MovieDAO')
 const assert = require('assert') 
 const uuid = require('uuid/v1') 
 
-const MOVIE_CREATE_MOCK = {     
+const  MOVIE_CREATE_MOCK = {     
     'name': 'The Matrix', 
     'genre': 'Action', 
     release_date: '31/03/1999', 
     imdb: 7.8
 }
 
+const MOVIE_UPDATE_MOCK = {
+    'name': 'Inception', 
+    'genre': 'Fiction', 
+    release_date: '31/03/1999', 
+    imdb: 8.5
+}
+
 describe('MovieDAO Tests', async function(){
     this.beforeAll(async function(){
-        // await movieDAO.createMovie(MOVIE_CREATE_MOCK)
+        // await movieDAO.create(MOVIE_CREATE_MOCK)
+        // await movieDAO.create(MOVIE_UPDATE_MOCK)
     })
     
     movieDAO = new MovieDAO() 
@@ -28,24 +36,24 @@ describe('MovieDAO Tests', async function(){
     })
 
     it('Read Movie', async function(){
-        const res = await movieDAO.read({name: MOVIE_CREATE_MOCK.name})
-        delete res.id, 
+        const res = await movieDAO.read({name: MOVIE_CREATE_MOCK.name}) 
+        delete res.id 
         assert.deepEqual(res, MOVIE_CREATE_MOCK) 
     })
 
     it('Update Movie', async function(){
-        const item = await movieDAO.read({name: MOVIE_CREATE_MOCK.name})
-        console.log('item', item)
+        const item = await movieDAO.read({name: MOVIE_UPDATE_MOCK.name}) 
+        console.log('item', item) 
         const newData = {
-            ... MOVIE_CREATE_MOCK, 
-            name: 'Animatrix', 
-            genre: 'Adventure / Animation / Fiction', 
-            // releaseDate: '03/06/2003'
+            ... MOVIE_UPDATE_MOCK, 
+            nome: 'Soul Reaver'
         }
 
-        const res = await movieDAO.update(item.id, newData)
-        
-        assert.deepEqual(res, true)
+        await movieDAO.update(item.id, newData)
+        const updatedItem = await movieDAO.read({id: item.id})
+
+        assert.deepEqual(updatedItem.id, item.id)
+        assert.deepEqual(updatedItem.name, newData.name) 
     })
 
     it('Delete Movie', async function(){

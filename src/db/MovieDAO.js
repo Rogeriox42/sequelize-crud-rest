@@ -19,7 +19,7 @@ class MovieDAO {
     }
 
     async read(query){
-        const [dataValues] = await this.db.findAll({query, raw: true})
+        const [{dataValues}] = await this.db.findAll({where: query, rawQuery: true})
         return dataValues
     }
 
