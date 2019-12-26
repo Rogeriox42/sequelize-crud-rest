@@ -1,0 +1,20 @@
+
+## postgres 
+docker run --name postgresnetflix -e POSTGRES_USER=wilmotrh -e POSTGRES_PASSWORD=charter -e POSTGRES_DB=netflix -p 5500:5432 -d postgres 
+
+docker run --name postgresnetflix -e POSTGRES_USER=wilmotrh -e POSTGRES_PASSWORD=charter -e POSTGRES_DB=netflix -p 5432:5432 -d postgres 
+
+
+## adminer 
+docker run --name adminer2 -p 8090:8080 --link postgresnetflix:postgres -d adminer
+
+docker run --name adminer2 -p 8090:8080 --link postgresnetflix:postgres -d adminer
+
+## Create table movie 
+CREATE TABLE MOVIE(
+ID INT PRIMARY KEY NOT NULL, 
+NAME TEXT NOT NULL, 
+GENRE TEXT, 
+RELEASEDATE TEXT, 
+IMDB FLOAT 
+)
