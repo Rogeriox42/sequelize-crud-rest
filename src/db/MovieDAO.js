@@ -18,8 +18,8 @@ class MovieDAO {
         }
     }
 
-    async delete(id){
-        const res = await this.db.destroy({where: {id: id}})
+    async delete(query = {}){
+        const res = await this.db.destroy({where: query})
         return res 
     }
 

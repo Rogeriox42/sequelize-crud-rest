@@ -29,8 +29,9 @@ describe('MovieDAO Tests', async function(){
         assert.deepEqual(res, MOVIE_CREATE_MOCK) 
     })
 
-    // it('Delete Movie', async function(){
-    //     const res = await movieDAO.delete(9)
-    //     assert.deepEqual(res, true) 
-    // })
+    it('Delete Movie', async function(){
+        const item = await movieDAO.read({})
+        const res = await movieDAO.delete({id: item.id})
+        assert.deepEqual(res, true) 
+    })
 })
