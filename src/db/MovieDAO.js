@@ -9,7 +9,7 @@ class MovieDAO {
         this._modelMovie()
     }
 
-    async createMovie(item) {
+    async create(item) {
         try {
             const { dataValues } = await this.db.create(item)
             return true
@@ -18,14 +18,20 @@ class MovieDAO {
         }
     }
 
+    async read(query){
+        const [dataValues] = await this.db.findAll({query, raw: true})
+        return dataValues
+    }
+
     async delete(query = {}){
         const res = await this.db.destroy({where: query})
         return res 
     }
 
-    async read(query){
-        const [dataValues] = await this.db.findAll({query, raw: true})
-        return dataValues
+    async update(id, item){
+        const res = await this.db.update(item, {where: {id: id}})
+        return res == 1 ? true : false 
+        // return false 
     }
 
     async _modelMovie() {
